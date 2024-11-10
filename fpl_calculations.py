@@ -1,8 +1,6 @@
 import requests
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import Ridge
-from sklearn.model_selection import GridSearchCV
 import cvxpy as cp
 
 
@@ -209,7 +207,8 @@ def calculations_gk(fpl_data):
         bonus_pg = bonus/games
         
         #tries to use a factor model to give a point projection based on recent performance using scoring and most important stats
-        GK_Score = ((.5 * value_form) + (.05 * points_per_game) + (.5 * points_to_price) + (.05 * form) + (1 * clean_sheets_pg) + (bonus_pg) + (0.4 * saves_pg) - (0.4 * goals_conceded_pg) - (0.1 * fixture_difficulty) - (0.05 * volatility) + (0.05 * starts_per_90))/2
+        # Return (Value Score) = factor1 * weight1 + factor2 * weight2 + ... + factorN * weightN
+        GK_Score = 0 + ((.5 * value_form) + (.05 * points_per_game) + (.5 * points_to_price) + (.05 * form) + (1 * clean_sheets_pg) + (bonus_pg) + (0.4 * saves_pg) - (0.4 * goals_conceded_pg) - (0.1 * fixture_difficulty) - (0.05 * volatility) + (0.05 * starts_per_90))/2
         
         
         GK_Score = np.round(GK_Score, 2)
@@ -319,7 +318,7 @@ def calculations_def(fpl_data):
         pd.set_option('display.max_rows', 200)  # Adjust this as needed
         pd.set_option('display.max_columns', None)
 
-        DEF_Score = ((.4 * value_form) + (.05 * points_per_game) + (.3 * points_to_price) + (.05 * form) + (1 * clean_sheets_pg) + (bonus_pg) + (1.05 * goals_pg) + (.95 * assists_pg) + (.85 * expected_assists_pg) + (.95 * expected_goals_pg) - (.25 * goals_conceded_pg) - (0.1 * fixture_difficulty) - (0.05 * volatility) + (0.05 * starts_per_90))
+        DEF_Score = 0 + ((.4 * value_form) + (.05 * points_per_game) + (.3 * points_to_price) + (.05 * form) + (1 * clean_sheets_pg) + (bonus_pg) + (1.05 * goals_pg) + (.95 * assists_pg) + (.85 * expected_assists_pg) + (.95 * expected_goals_pg) - (.25 * goals_conceded_pg) - (0.1 * fixture_difficulty) - (0.05 * volatility) + (0.05 * starts_per_90))
 
        
         
@@ -421,7 +420,7 @@ def calculations_mid(fpl_data):
         pd.set_option('display.max_columns', None)
                 
         
-        MID_Score = ((.4 * value_form) + (.05 * points_per_game) + (.3 * points_to_price) + (.1 * clean_sheets_pg) + (.05 * form) + (bonus_pg) + (1.1 * goals_pg) + (1 * assists_pg) + (.8 * expected_assists_pg) + (.9 * expected_goals_pg) - (0.1 * fixture_difficulty) - (0.05 * volatility) + (0.05 * starts_per_90))
+        MID_Score = 0 + ((.4 * value_form) + (.05 * points_per_game) + (.3 * points_to_price) + (.1 * clean_sheets_pg) + (.05 * form) + (bonus_pg) + (1.1 * goals_pg) + (1 * assists_pg) + (.8 * expected_assists_pg) + (.9 * expected_goals_pg) - (0.1 * fixture_difficulty) - (0.05 * volatility) + (0.05 * starts_per_90))
 
         
         MID_Score = np.round(MID_Score, 2)
