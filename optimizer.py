@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import cvxpy as cp
 from fpl_calculations import calculations_def, calculations_fwd, calculations_gk, calculations_mid
 
@@ -165,3 +164,4 @@ def optimize_team(fpl_data, budget, formation):
 def combine_scores(gk_table, def_table, mid_table, fwd_table):
     all_players = pd.concat([gk_table, def_table, mid_table, fwd_table], ignore_index=True)
     return all_players
+
